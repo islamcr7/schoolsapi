@@ -12,15 +12,15 @@ class Student extends Model
     protected $table = 'students';
 
 	protected $fillable = [
-		'firstname',
-		'lastname',
-        'sexe',
+		'firstName',
+		'lastName',
+        'sex',
         'mail',
-		'telephone',
+		'phoneNumber',
 		'address',
         'birthdate',
         'level',
-        'parent_contact'
+        'parentContact'
 
 	];
 }

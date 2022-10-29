@@ -15,8 +15,25 @@ class StudentController extends BaseController
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        $Students = Student::latest()->paginate(10);
+        if ($request->has('search')){
+            // Get the search value from the request
+            $search = $request->input('search');
+
+            $Students = Student::query()
+            ->where('firstName', 'LIKE', "%{$search}%")
+            ->orWhere('lastName', 'LIKE', "%{$search}%")
+            ->get();
+            
+        }else{
+
+            $Students = Student::latest()->paginate(10);
+
+        }
+
+
+
 
         return $this->sendResponse(StudentResource::collection($Students), 'Students retrieved successfully.');
 

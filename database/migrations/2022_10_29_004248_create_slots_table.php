@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('slots', function (Blueprint $table) {
             $table->id();
             $table->integer('slots_number');
-            $table->bigint('fee');
+            $table->decimal('fee');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->foreign('professor_id')->references('id')->on('professors')->onDelete('cascade');
             $table->timestamps();

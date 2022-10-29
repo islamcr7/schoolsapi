@@ -14,7 +14,7 @@ class StudentController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
 
     {
         if ($request->has('search')){
@@ -25,7 +25,7 @@ class StudentController extends BaseController
             ->where('firstName', 'LIKE', "%{$search}%")
             ->orWhere('lastName', 'LIKE', "%{$search}%")
             ->get();
-            
+
         }else{
 
             $Students = Student::latest()->paginate(10);

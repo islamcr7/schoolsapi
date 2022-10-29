@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('slots_number');
             $table->decimal('fee');
+            $table->unsignedBigInteger('module_id')->nullable();
+            $table->unsignedBigInteger('professor_id')->nullable();
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->foreign('professor_id')->references('id')->on('professors')->onDelete('cascade');
             $table->timestamps();

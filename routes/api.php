@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\SlotController;
+use App\Http\Controllers\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +33,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::resource('students', StudentController::class);
     Route::resource('modules', ModuleController::class);
     Route::resource('professors', ProfessorController::class);
+    Route::resource('slots', ModuleController::class);
+    Route::resource('subscriptions', ProfessorController::class);
 
 });

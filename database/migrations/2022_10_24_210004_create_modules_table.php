@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->string('description')->nullable();
+            $table->string('level')->nullable();
             $table->timestamps();
         });
     }

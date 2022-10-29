@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('professors', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname')->index();
-            $table->string('lastname')->index();
-            $table->string('telephone1');
-            $table->string('telephone2');
+            $table->string('firstName')->index();
+            $table->string('lastName')->index();
+            $table->string('phoneNumber1');
+            $table->string('phoneNumber2')->nullable();
             $table->string('mail')->unique();
-            $table->enum('sexe', ['M', 'F']);
+            $table->enum('sex', ['M', 'F']);
             $table->longtext('address');
-            $table->date('birthdate');
-            $table->string('module');
+            $table->date('birthDate');
+            $table->string('profession');
             $table->timestamps();
         });
     }

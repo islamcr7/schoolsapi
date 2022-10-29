@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Professor;
 use Illuminate\Http\Request;
+use App\Http\Resources\StudentResource as ProfessorResource;
+use App\Http\Controllers\BaseController as BaseController;
 
-class ProfessorController extends Controller
+class Controller extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,10 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        //
+        $Professors = Professor::latest()->paginate(10);
+
+        return $this->sendResponse(ProfessorResource::collection($Professors), 'Professors retrieved successfully.');
+
     }
 
     /**
@@ -35,27 +40,33 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $Professor = Professor::create($request->all());
+   
+        return $this->sendResponse(new ProfessorResource($Professor), 'Professor created successfully.');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Professor  $professor
+     * @param  \App\Models\Professor  $Professor
      * @return \Illuminate\Http\Response
      */
-    public function show(Professor $professor)
+    public function show(Professor $Professor)
     {
-        //
+        
+        return $this->sendResponse(new ProfessorResource($Professor), 'Professor retrieved successfully.');
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Professor  $professor
+     * @param  \App\Models\Professor  $Professor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Professor $professor)
+    public function edit(Professor $Professor)
     {
         //
     }
@@ -64,22 +75,30 @@ class ProfessorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Professor  $professor
+     * @param  \App\Models\Professor  $Professor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Professor $professor)
+    public function update(Request $request, Professor $Professor)
     {
-        //
+
+        $Professor->update($request->all());   
+ 
+        return $this->sendResponse(new ProfessorResource($Professor), 'Professor updated successfully.');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Professor  $professor
+     * @param  \App\Models\Professor  $Professor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Professor $professor)
+    public function destroy(Professor $Professor)
     {
-        //
+
+        $Professor->delete();
+
+        return $this->sendResponse([], 'Professor deleted successfully.');
+
     }
 }

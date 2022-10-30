@@ -17,6 +17,7 @@ class StudentController extends BaseController
     public function index(Request $request)
 
     {
+
         if ($request->has('search')){
             // Get the search value from the request
             $search = $request->input('search');
@@ -25,15 +26,15 @@ class StudentController extends BaseController
             ->where('firstName', 'LIKE', "%{$search}%")
             ->orWhere('lastName', 'LIKE', "%{$search}%")
             ->get();
-
+      
         }else{
 
             $Students = Student::latest()->paginate(10);
-            $studentsnumber=$Students->count();
+
 
         }
 
-
+        $studentsnumber=$Students->count();
 
 
         return $this->sendResponse(StudentResource::collection($Students), 'Students retrieved successfully.',$studentsnumber);

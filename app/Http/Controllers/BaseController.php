@@ -23,7 +23,7 @@ class BaseController extends Controller
 
      */
 
-    public function sendResponse($result, $message)
+    public function sendResponse($result, $message,$count)
 
     {
 
@@ -34,6 +34,8 @@ class BaseController extends Controller
             'data'    => $result,
 
             'message' => $message,
+
+            'count' => $count,
 
         ];
 

@@ -28,14 +28,15 @@ class StudentController extends BaseController
 
         }else{
 
-            $Students = Student::latest()->paginate(10);
+            $Students = Student::latest()->withCount()->paginate(10);
+            $studentsnumber=$Students->count();
 
         }
 
 
 
 
-        return $this->sendResponse(StudentResource::collection($Students), 'Students retrieved successfully.');
+        return $this->sendResponse(StudentResource::collection($Students), 'Students retrieved successfully.',$studentsnumber);
 
     }
 
@@ -60,7 +61,7 @@ class StudentController extends BaseController
         
         $Student = Student::create($request->all());
    
-        return $this->sendResponse(new StudentResource($Student), 'Student created successfully.');
+        return $this->sendResponse(new StudentResource($Student), 'Student created successfully.',1);
 
     }
 
@@ -73,7 +74,7 @@ class StudentController extends BaseController
     public function show(Student $Student)
     {
         
-        return $this->sendResponse(new StudentResource($Student), 'Student retrieved successfully.');
+        return $this->sendResponse(new StudentResource($Student), 'Student retrieved successfully.',1);
 
     }
 
@@ -100,7 +101,7 @@ class StudentController extends BaseController
 
         $Student->update($request->all());   
  
-        return $this->sendResponse(new StudentResource($Student), 'Student updated successfully.');
+        return $this->sendResponse(new StudentResource($Student), 'Student updated successfully.',1);
 
     }
 
@@ -115,7 +116,7 @@ class StudentController extends BaseController
 
         $Student->delete();
 
-        return $this->sendResponse([], 'Student deleted successfully.');
+        return $this->sendResponse([], 'Student deleted successfully.',1);
 
     }
 }

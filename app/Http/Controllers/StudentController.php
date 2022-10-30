@@ -28,7 +28,7 @@ class StudentController extends BaseController
 
         }else{
 
-            $Students = Student::latest()->withCount()->paginate(10);
+            $Students = Student::latest()->paginate(10);
             $studentsnumber=$Students->count();
 
         }
